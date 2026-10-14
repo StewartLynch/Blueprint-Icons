@@ -17,14 +17,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var monitor = ToolMonitor()
+    /// Owned here so a re-check of the tool does not throw away the user's choices.
+    @State private var options = BlueprintOptions.restored()
+    @Environment(\.scenePhase) private var scenePhase
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            switch monitor.status {
+            case .checking:
+                ProgressView("Looking for blueprint…")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            case .found(let install):
+                MainView(monitor: monitor, install: install, options: options)
+            case .notFound(let diagnostics):
+                SetupView(monitor: monitor, diagnostics: diagnostics)
+            }
         }
-        .padding()
+        .frame(minWidth: 520, minHeight: 560)
+        .task { await monitor.check() }
+        .onChange(of: scenePhase) { _, phase in
+            // After installing in Terminal, switching back to the app re-checks automatically.
+            if phase == .active, case .notFound = monitor.status {
+                Task { await monitor.check() }
+            }
+        }
     }
 }
 

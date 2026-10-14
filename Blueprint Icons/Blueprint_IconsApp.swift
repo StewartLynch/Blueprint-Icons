@@ -19,8 +19,28 @@ import SwiftUI
 @main
 struct Blueprint_IconsApp: App {
     var body: some Scene {
-        WindowGroup {
+        // A single main window, so there is only ever one set of options.
+        Window("Blueprint Icons", id: "main") {
             ContentView()
+        }
+        .defaultSize(width: 580, height: 720)
+        .windowResizability(.contentMinSize)
+        .commands { AboutCommands() }
+
+        Window("About Blueprint Icons", id: "about") {
+            AboutView()
+        }
+        .windowResizability(.contentSize)
+    }
+}
+
+/// Puts "About Blueprint Icons" in the app menu.
+struct AboutCommands: Commands {
+    @Environment(\.openWindow) private var openWindow
+
+    var body: some Commands {
+        CommandGroup(replacing: .appInfo) {
+            Button("About Blueprint Icons") { openWindow(id: "about") }
         }
     }
 }
