@@ -1,6 +1,8 @@
 # Blueprint Icons
 
-A small macOS app that puts a friendly interface on top of **[blueprint](https://github.com/MustafaNatur/blueprint)**, the command line tool by Mustafa Natur that turns an app icon into a blueprint style version for your debug builds.
+![Samples](assets/Samples.png)
+
+A small macOS app that puts a friendly interface on top of **[blueprint](https://github.com/MustafaNatur/blueprint)**, the command line tool by **Mustafa Natur** that turns an app icon into a blueprint style version for your debug builds.
 
 Instead of remembering flags in Terminal, you drop in an icon, pick a name and folder, tweak the options, and press **Create Icon**.
 
