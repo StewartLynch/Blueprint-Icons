@@ -22,6 +22,7 @@ What that means for you:
 - The code was not written line by line by a human. Review it before relying on it, especially if you adapt it for anything important.
 - Bugs are likely to turn up. Issues and pull requests are welcome.
 - The app runs a command line tool on your Mac, with App Sandbox turned off (see below). Read the code if you want to be sure about what it does. It is small.
+- The same applies to the compiled app on the Releases page. It is built from this code, by hand, in Xcode.
 
 ## What it does
 
@@ -42,6 +43,12 @@ What that means for you:
 - Warns you before overwriting something, and refuses to replace your own source icon.
 - Shows the exact Terminal command, so you can copy it and run it yourself.
 - Remembers only your last output folder. All style options start at their defaults each time.
+
+## Download
+
+Grab the latest build from the [Releases page](../../releases/latest). Unzip it and drag **Blueprint Icons** into your Applications folder. You still need to install blueprint separately (see below). The app checks for it and shows you how if it is missing.
+
+If macOS refuses to open the app because it was downloaded from the internet, right-click it and choose Open, or go to System Settings > Privacy & Security and choose Open Anyway. If you would rather not run a downloaded binary, build it yourself from source (see Building).
 
 ## Requirements
 
@@ -72,6 +79,8 @@ That installs it to `~/.local/bin`. The app looks there, in `/opt/homebrew/bin` 
 See the [blueprint README](https://github.com/MustafaNatur/blueprint) for its own documentation.
 
 ## Building
+
+You only need this if you want to build the app yourself instead of using a release.
 
 1. Clone this repository.
 2. Open `Blueprint Icons.xcodeproj` in Xcode 26 or later.
